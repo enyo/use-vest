@@ -12,8 +12,13 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["vitest/globals"],
+    "outDir": "./dist",
+    "declaration": false
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["./node_modules/**"]
+  "rootDirs": ["."],
+  "include": ["src/**/*.ts", "test/**/*.ts", "test/**/*.svelte"],
+  "exclude": ["./node_modules"]
 }

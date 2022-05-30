@@ -1,16 +1,36 @@
 {
   "name": "use-vest",
   "version": "0.0.3",
+  "type": "module",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
-    "svelte": ">=3.46.5 <4.x",
+    "svelte": "^3.48.0",
     "vest": "4.x"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "test": "vitest",
+    "check": "eslint --max-warnings=0 src/ test/"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.2",
+    "@sveltejs/vite-plugin-svelte": "1.0.0-next.45",
+    "@testing-library/dom": "^8.13.0",
+    "@testing-library/svelte": "^3.1.1",
+    "@testing-library/user-event": "^14.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "jsdom": "^19.0.0",
     "rollup": "^2.75.3",
+    "rollup-plugin-dts": "^4.2.2",
+    "svelte-preprocess": "^4.10.6",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.2"
-  },
-  "type": "module",
-  "module": "dist/index.js"
+    "typescript": "^4.7.2",
+    "vite": "^2.9.9",
+    "vitest": "^0.13.0"
+  }
 }
