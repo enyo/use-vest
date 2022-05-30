@@ -1,4 +1,7 @@
-# A Svelte action for Vest
+# use-vest
+
+A Svelte action for Vest, that makes it easy to validate forms and show errors
+when necessary.
 
 Vest, in their own words is a "Declarative validations framework inspired by
 unit testing libraries".
@@ -6,6 +9,8 @@ unit testing libraries".
 This svelte action aims to make it easy to use vest in your svelte forms to
 validate your data and show errors. It will also wrap your call that submits the
 data to your server and handle any errors that might happen there as well.
+
+See it in action in this [Svelte REPL](https://svelte.dev/repl/7094c5603d02477c8333ad42fc73c3d1?version=3.42.6)
 
 ## Installation
 

@@ -1,6 +1,6 @@
 {
   "name": "use-vest",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "dependencies": {
     "svelte": ">=3.46.5 <4.x",
     "vest": "4.x"

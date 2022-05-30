@@ -10,7 +10,7 @@ export type VestContext = {
   data: Readable<GenericFormData>
   updateField: UpdateField
   result: Readable<SuiteResult>
-  disabled: Readable<boolean>
+  submitting: Readable<boolean>
 }
 
 export const getVestContext = (): VestContext => getContext(vestContextKey)
@@ -83,7 +83,7 @@ export const useVest = <T extends GenericFormData>(
     data,
     result,
     updateField,
-    disabled,
+    submitting,
   })
 
   const internalSubmit = async () => {
