@@ -57,10 +57,16 @@ Here's how you use the action in your project:
     },
   )
 
-  const { result } = getVestContext()
+  const { data, submitting, updateValue } = getVestContext()
 </script>
 
 <form use:action>
-  <!-- WIP -->
+  <!-- Your form fields -->
+  <input disabled={$submitting} value={data.name} on:input={(e) =>
+  updateValue('name', e.currentTarget.value)} />
+
+  <button {disabled}>Submit</button>
 </form>
 ```
+
+For a more in depth example look at [the tests](./test/components/).
