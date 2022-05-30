@@ -32,4 +32,28 @@ or display errors.
 
 ## Usage
 
-Here's the code for your
+Here's how you use the action in your project:
+
+```html
+<script lang="ts">
+  import { getVestContext, useVest } from 'use-vest'
+  import { suite, type FormData } from '$lib/form-suites/registration'
+
+  let success = false
+  const initialData: FormData = { name: '', password: '', email: '' }
+  const { action, error, disabled } = useVest<FormData>(
+    suite,
+    initialData,
+    async (data) => {
+      await submitRegisrationData(data)
+      success = true
+    },
+  )
+
+  const { result } = getVestContext()
+</script>
+
+<form use:action>
+  <!-- WIP -->
+</form>
+```

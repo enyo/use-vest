@@ -15,7 +15,10 @@ export type VestContext = {
 
 export const getVestContext = (): VestContext => getContext(vestContextKey)
 
-export type UpdateField = (name: string, value: string | number | boolean) => void
+export type UpdateField = (
+  name: string,
+  value: string | number | boolean,
+) => void
 
 export type GenericFormData = { [key: string]: string | number | boolean }
 
@@ -38,7 +41,7 @@ const readableFrom = <T>(writable: Writable<T>): Readable<T> => ({
  *     const { action, error, disabled, reset } = useVest<FormData>(
  *       suite,
  *       { initial: 'data' },
- *       async data => {
+ *       async (data) => {
  *         // Submit the data to your server
  *       }
  *   )
@@ -47,7 +50,7 @@ export const useVest = <T extends GenericFormData>(
   suite: Suite<(data: T, currentField?: string | undefined) => void>,
   initialData: T,
   submit: (data: T) => Promise<void>,
-  { convertError = (e: unknown) => `${e}` } = {}
+  { convertError = (e: unknown) => `${e}` } = {},
 ): UseVestResult<T> => {
   suite.reset()
   const error = writable('')
@@ -71,12 +74,17 @@ export const useVest = <T extends GenericFormData>(
   }
 
   const updateField: UpdateField = (name, value) => {
-    data.update(data => ({ ...data, [name]: value }))
+    data.update((data) => ({ ...data, [name]: value }))
     const newData = get(data)
     result.set(suite(newData, name))
   }
 
-  setContext<VestContext>(vestContextKey, { data, result, updateField, disabled })
+  setContext<VestContext>(vestContextKey, {
+    data,
+    result,
+    updateField,
+    disabled,
+  })
 
   const internalSubmit = async () => {
     if (get(submitting)) return
@@ -96,7 +104,7 @@ export const useVest = <T extends GenericFormData>(
     }
   }
   const action = (node: HTMLFormElement) => {
-    node.addEventListener('submit', e => {
+    node.addEventListener('submit', (e) => {
       e.preventDefault()
       void internalSubmit()
     })
