@@ -33,3 +33,8 @@ jobs:
       - name: Build library
         id: build
         run: pnpm run build
+
+      - uses: JS-DevTools/npm-publish@v1
+        if: steps.build.outcome == 'success' && github.ref == 'refs/heads/main'
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
