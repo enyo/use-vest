@@ -1,5 +1,7 @@
 # use-vest
 
+[![CI](https://github.com/enyo/use-vest/actions/workflows/ci.yml/badge.svg)](https://github.com/enyo/use-vest/actions/workflows/ci.yml)
+
 A Svelte action for Vest, that makes it easy to validate forms and show errors
 when necessary.
 
