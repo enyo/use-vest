@@ -1,4 +1,6 @@
 <script lang="ts">
+  // In your app you must import it like this:
+  // import { getVestContext } from 'use-vest'
   import { getVestContext } from '../src/index'
 
   // The name of the field.

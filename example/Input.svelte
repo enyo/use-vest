@@ -1,4 +1,6 @@
 <script lang="ts">
+  // In your app you must import it like this:
+  // import { getVestContext } from 'use-vest'
   import { getVestContext } from '../src/index'
   import InputError from './InputError.svelte'
 

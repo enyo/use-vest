@@ -1,6 +1,6 @@
 <script lang="ts">
   // In your app you must import it like this:
-  // import { useVest } from '../src/index'
+  // import { useVest } from 'use-vest'
   import { useVest } from '../src/index'
 
   // Import everything about our vest suite.
