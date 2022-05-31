@@ -1,6 +1,6 @@
 {
   "name": "use-vest",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "author": {
     "name": "Matias Meno",
@@ -30,6 +30,8 @@
     "@testing-library/user-event": "^14.2.0",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
+    "svelte": "^3.48.0",
+    "vest": "4.x",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",
