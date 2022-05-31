@@ -1,24 +1,11 @@
-import { getContext, setContext } from 'svelte'
+import { setContext } from 'svelte'
 import type { Action } from 'svelte/action'
 import type { Readable, Writable } from 'svelte/store'
 import { derived, get, writable } from 'svelte/store'
-import type { Suite, SuiteResult } from 'vest'
+import type { Suite } from 'vest'
+import { vestContextKey, type UpdateField, type VestContext } from './context'
 
-const vestContextKey = {}
-
-export type VestContext = {
-  data: Readable<GenericFormData>
-  updateField: UpdateField
-  result: Readable<SuiteResult>
-  submitting: Readable<boolean>
-}
-
-export const getVestContext = (): VestContext => getContext(vestContextKey)
-
-export type UpdateField = (
-  name: string,
-  value: string | number | boolean,
-) => void
+export { getVestContext, type VestContext } from './context'
 
 export type GenericFormData = { [key: string]: string | number | boolean }
 
@@ -35,6 +22,22 @@ const readableFrom = <T>(writable: Writable<T>): Readable<T> => ({
   subscribe: writable.subscribe,
 })
 
+type UseVestOptions<T extends GenericFormData> = {
+  initialData: T
+  /**
+   * Invoked when the user submits the form. This is where you submit the data
+   * to your server. If this function throws an exception, the exception is
+   * caught, converted to a string with `convertError` and put into the `$error`
+   * store.
+   */
+  submit: (data: T) => Promise<void>
+  /**
+   * When the submit function throws an error, this function converts the error
+   * to a user presentable string.
+   */
+  convertError?: (e: unknown) => string
+}
+
 /**
  * Example usage:
  *
@@ -48,9 +51,11 @@ const readableFrom = <T>(writable: Writable<T>): Readable<T> => ({
  */
 export const useVest = <T extends GenericFormData>(
   suite: Suite<(data: T, currentField?: string | undefined) => void>,
-  initialData: T,
-  submit: (data: T) => Promise<void>,
-  { convertError = (e: unknown) => `${e}` } = {},
+  {
+    initialData,
+    submit,
+    convertError = (e: unknown) => `${e}`,
+  }: UseVestOptions<T>,
 ): UseVestResult<T> => {
   suite.reset()
   const error = writable('')

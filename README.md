@@ -1,9 +1,11 @@
 # use-vest
 
-[![CI](https://github.com/enyo/use-vest/actions/workflows/ci.yml/badge.svg)](https://github.com/enyo/use-vest/actions/workflows/ci.yml)
+[![Tests](https://github.com/enyo/use-vest/actions/workflows/ci.yml/badge.svg)](https://github.com/enyo/use-vest/actions/workflows/ci.yml)
+[![npm version](https://badge.fury.io/js/use-vest.svg)](https://badge.fury.io/js/use-vest)
+![TypeScript](https://badgen.net/badge/icon/typescript?icon=typescript&label)
 
 A Svelte action for Vest, that makes it easy to validate forms and show errors
-when necessary.
+when necessary — built with TypeScript.
 
 Vest, in their own words is a "Declarative validations framework inspired by
 unit testing libraries".
@@ -12,7 +14,9 @@ This svelte action aims to make it easy to use vest in your svelte forms to
 validate your data and show errors. It will also wrap your call that submits the
 data to your server and handle any errors that might happen there as well.
 
-See it in action in this [Svelte REPL](https://svelte.dev/repl/7094c5603d02477c8333ad42fc73c3d1?version=3.42.6)
+See it in action in this [Svelte
+REPL](https://svelte.dev/repl/7094c5603d02477c8333ad42fc73c3d1?version=3.42.6)
+or look at the example in [the example](./example/).
 
 ## Installation
 
@@ -23,50 +27,33 @@ pnpm add use-vest
 # or whatever package manager you like
 ```
 
-## How it works
-
-Before going to the usage section, a short description of how `use-vest` works:
-
-In your svelte component that handles the form, you invoke `useVest(...)` with
-your vest suite and other necessary options. You will then get back the actual
-`action` that you can use on your form (`<form use:action>`) as well as a few
-Svelte (readable) stores that you can use to disable the form or show errors or
-success messages.
-
-The `useVest()` function will _also_ create a Svelte context for you, that you
-can read in your field components to update the values as well as disable fields
-or display errors.
-
 ## Usage
 
-Here's how you use the action in your project:
+Let's assume you have finished [writing your
+suite](https://vestjs.dev/docs/writing_your_suite/vests_suite) and have exported
+the TypeScript type for your `FormData` (optional).
 
-```html
-<script lang="ts">
-  import { getVestContext, useVest } from 'use-vest'
-  import { suite, type FormData } from '$lib/form-suites/registration'
+To see how you would incorporate `use-vest` in your form, look at the
+[Form.svelte](./example/Form.svelte) file.
 
-  let success = false
-  const initialData: FormData = { name: '', password: '', email: '' }
-  const { action, error, disabled } = useVest<FormData>(
-    suite,
-    initialData,
-    async (data) => {
-      await submitRegisrationData(data)
-      success = true
-    },
-  )
+> **NOTE**: Instead of posting all code snippets directly in this README, I
+> decided to use an `example/` directory and link to it. This way the example
+> can be type checked, and is actually the source for the unit tests so there
+> is no risk of the documentation being outdated.
 
-  const { data, submitting, updateValue } = getVestContext()
-</script>
+As you can see, `useVest` returns a few stores that hold information about the
+current state of your form.
 
-<form use:action>
-  <!-- Your form fields -->
-  <input disabled={$submitting} value={data.name} on:input={(e) =>
-  updateValue('name', e.currentTarget.value)} />
+**But how do the individual input fields get their validation status?**
 
-  <button {disabled}>Submit</button>
-</form>
-```
+`useVest` sets up a [Svelte context](https://svelte.dev/tutorial/context-api)
+(that is accessible to all children) where everything necessary to display the
+input field state is stored.
 
-For a more in depth example look at [the tests](./test/components/).
+Any input field inside the form simply uses [`getVestContext()`](./src/context.ts) to get the
+correct context object, and this object will contain the validation result, as
+well as information about the form in general.
+
+To see how you can use that context, look at
+[Input.svelte](./example/Input.svelte) and
+[InputError.svelte](./example/InputError.svelte).

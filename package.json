@@ -1,6 +1,6 @@
 {
   "name": "use-vest",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "type": "module",
   "author": {
     "name": "Matias Meno",
@@ -20,7 +20,7 @@
   "scripts": {
     "build": "rollup -c",
     "test": "vitest",
-    "check": "eslint --max-warnings=0 src/ test/"
+    "check": "eslint --max-warnings=0 src/ test/ example/"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.2",

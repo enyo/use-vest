@@ -19,6 +19,11 @@
     "declaration": false
   },
   "rootDirs": ["."],
-  "include": ["src/**/*.ts", "test/**/*.ts", "test/**/*.svelte"],
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "example/**/*.ts",
+    "example/**/*.svelte"
+  ],
   "exclude": ["./node_modules"]
 }

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/svelte'
 import userEvent from '@testing-library/user-event'
-import Form from './components/Form.svelte'
+import Form from '../example/Form.svelte'
 
 test('submit button is disabled until form data is valid', async () => {
   const { getByText, getByRole, getByPlaceholderText } = render(Form)
@@ -56,4 +56,35 @@ test('shows individual errors for each field', async () => {
   expect(getByTestId('error-email').innerHTML).toBeFalsy()
   expect(getByTestId('error-firstName').innerHTML).toBeFalsy()
   expect(getByTestId('error-lastName').innerHTML).toBeFalsy()
+})
+
+test('invokes the submit function when the form is submitted', async () => {
+  const { getByPlaceholderText, getByRole } = render(Form)
+
+  expect(getByRole('heading', { level: 1 }).innerHTML).toEqual('Register')
+
+  await userEvent.type(getByPlaceholderText('email'), 'e@mail.com')
+  await userEvent.type(getByPlaceholderText('firstName'), 'John')
+  await userEvent.type(getByPlaceholderText('lastName'), 'Doe')
+
+  await userEvent.click(getByRole('button'))
+
+  expect(getByRole('heading', { level: 1 }).innerHTML).toEqual('Success!')
+})
+
+test('invokes the submit function and shows the error if it throws', async () => {
+  const { getByPlaceholderText, getByRole } = render(Form)
+
+  expect(getByRole('heading', { level: 1 }).innerHTML).toEqual('Register')
+
+  await userEvent.type(getByPlaceholderText('email'), 'invalid@email.com')
+  await userEvent.type(getByPlaceholderText('firstName'), 'John')
+  await userEvent.type(getByPlaceholderText('lastName'), 'Doe')
+
+  await userEvent.click(getByRole('button'))
+
+  expect(getByRole('heading', { level: 1 }).innerHTML).toEqual('Register')
+  expect(getByRole('alert').innerHTML).toEqual(
+    'This email is already registered',
+  )
 })
