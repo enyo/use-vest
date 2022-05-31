@@ -13,6 +13,10 @@
     "url": "https://github.com/enyo/use-vest"
   },
   "homepage": "https://github.com/enyo/use-vest",
+  "peerDependencies": {
+    "svelte": "3.x",
+    "vest": "4.x"
+  },
   "scripts": {
     "build": "rollup -c",
     "test": "vitest",
