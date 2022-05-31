@@ -1,6 +1,6 @@
 {
   "name": "use-vest",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "type": "module",
   "author": {
     "name": "Matias Meno",
@@ -13,10 +13,6 @@
     "url": "https://github.com/enyo/use-vest"
   },
   "homepage": "https://github.com/enyo/use-vest",
-  "peerDependencies": {
-    "svelte": "3.x",
-    "vest": "4.x"
-  },
   "scripts": {
     "build": "rollup -c",
     "test": "vitest",
