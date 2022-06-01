@@ -69,9 +69,20 @@ export const useVest = <T extends GenericFormData>(
   }
   const result = writable(suite.get())
 
-  const disabled = derived([submitting, result], ([submitting, result]) => {
-    return !result.isValid() || submitting
-  })
+  // Whether the form action has been attached.
+  const actionAttached = writable(false)
+
+  const disabled = derived(
+    [submitting, result, actionAttached],
+    ([submitting, result, actionAttached]) => {
+      if (!actionAttached) {
+        // Since we don't want the submit button to be disabled with SSR we only
+        // disable the form once the action has been attached.
+        return false
+      }
+      return !result.isValid() || submitting
+    },
+  )
 
   const reset = (newData: T) => {
     data.set(newData)
@@ -109,6 +120,7 @@ export const useVest = <T extends GenericFormData>(
     }
   }
   const action = (node: HTMLFormElement) => {
+    actionAttached.set(true)
     node.addEventListener('submit', (e) => {
       e.preventDefault()
       void internalSubmit()
