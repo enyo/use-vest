@@ -1,5 +1,0 @@
-.github
-node_modules
-coverage
-*lock.*
-test

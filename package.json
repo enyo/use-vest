@@ -1,18 +1,16 @@
 {
   "name": "use-vest",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "type": "module",
-  "author": {
-    "name": "Matias Meno",
-    "email": "m@tias.me"
-  },
+  "author": "Matias Meno <m@tias.me>",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/enyo/use-vest"
-  },
+  "repository": "github:enyo/use-vest",
   "homepage": "https://github.com/enyo/use-vest",
+  "files": [
+    "dist",
+    "src"
+  ],
   "peerDependencies": {
     "svelte": "3.x",
     "vest": "4.x"
