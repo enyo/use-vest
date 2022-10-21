@@ -42,5 +42,10 @@
   Of course you might want more control over the input, or use a third party
   UI library altogether. Just expose any values that you might want and build
   your input field the way you want it to.
+
+  If you want the validation to be a bit delayed or only occur after the user
+  edited the field, take a look at this discussion:
+
+  https://github.com/enyo/use-vest/discussions/2
 -->
 <input disabled={$submitting} placeholder={name} {value} on:input={update} />
