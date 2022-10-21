@@ -18,9 +18,9 @@
 <small data-testid={`error-${name}`}>
   {#if errors}
     <!--
-			There is no need to display all errors since normally the first
-			error is the most important one (like that this field is required)
-		-->
+      There is no need to display all errors since normally the first
+      error is the most important one (like that this field is required)
+    -->
     {errors[0]}
   {/if}
 </small>
