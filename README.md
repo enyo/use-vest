@@ -4,7 +4,9 @@
 [![npm version](https://badge.fury.io/js/use-vest.svg)](https://badge.fury.io/js/use-vest)
 ![TypeScript](https://badgen.net/badge/icon/typescript?icon=typescript&label)
 
-**The best form validation for svelte.**
+> If you want to use Vest and Svelte, this library is for you!  
+> But if you're using SvelteKit, I recommend to use [SuperForms](https://superforms.vercel.app).
+
 
 This library provides a Svelte action for [Vest](https://vestjs.dev), that makes
 it easy to validate forms and show errors when necessary — built with
